@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andina Paprika — Páprika peruana para la industria cárnica chilena</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#F2EBE0;
+    --sand-deep:#E8DCC6;
+    --paprika:#C5481F;
+    --paprika-deep:#8C3115;
+    --olive:#3A4A2E;
+    --olive-deep:#26301E;
+    --ink:#2A2420;
+    --ink-soft:#6B6055;
+    --cream:#FBF8F2;
+    --line: rgba(42,36,32,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:'Fraunces',serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  @media(max-width:680px){.wrap{padding:0 20px;}}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(242,235,224,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:17px;letter-spacing:-0.01em;}
+  .logo-mark{width:30px;height:30px;border-radius:50%;background:var(--paprika);position:relative;flex-shrink:0;}
+  .logo-mark::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--sand);}
+  .navlinks{display:flex;gap:36px;font-size:14px;font-weight:500;}
+  .navlinks a{opacity:0.75;transition:opacity .2s;}
+  .navlinks a:hover{opacity:1;}
+  .nav-cta{
+    background:var(--olive);color:var(--cream);
+    padding:10px 20px;border-radius:100px;font-size:13px;font-weight:600;
+    transition:background .2s;
+  }
+  .nav-cta:hover{background:var(--olive-deep);}
+  .nav-toggle{display:none;background:none;border:0;font-size:24px;cursor:pointer;color:var(--ink);}
+  @media(max-width:860px){
+    .navlinks{display:none;}
+    .nav-toggle{display:block;}
+  }
+
+  /* HERO */
+  .hero{padding:88px 0 64px;position:relative;overflow:hidden;}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
+  @media(max-width:900px){.hero .wrap{grid-template-columns:1fr;}}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--paprika-deep);margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--paprika);}
+  .hero h1{
+    font-size:clamp(36px,5vw,58px);font-weight:500;line-height:1.04;letter-spacing:-0.015em;
+    margin-bottom:24px;
+  }
+  .hero h1 em{font-style:italic;color:var(--paprika);}
+  .hero p.lead{font-size:18px;color:var(--ink-soft);max-width:480px;margin-bottom:32px;line-height:1.6;}
+  .btn-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 26px;border-radius:100px;font-size:14.5px;font-weight:600;
+    transition:transform .15s, background .2s;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--paprika);color:var(--cream);}
+  .btn-primary:hover{background:var(--paprika-deep);}
+  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--ink);}
+
+  /* HERO VISUAL: distance comparator */
+  .distance-card{
+    background:var(--cream);border-radius:20px;border:1px solid var(--line);
+    padding:28px;box-shadow:0 1px 2px rgba(42,36,32,0.04);
+  }
+  .distance-card h3{font-size:13px;font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:20px;}
+  .route{margin-bottom:18px;}
+  .route:last-child{margin-bottom:0;}
+  .route-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+  .route-name{font-size:14.5px;font-weight:600;}
+  .route-days{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500;}
+  .route.us .route-days{color:var(--olive);}
+  .route.them .route-days{color:var(--ink-soft);}
+  .bar-track{height:10px;background:var(--sand-deep);border-radius:6px;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:6px;}
+  .route.us .bar-fill{background:var(--olive);width:18%;}
+  .route.them .bar-fill{background:var(--ink-soft);opacity:0.4;width:100%;}
+  .route-sub{font-size:12px;color:var(--ink-soft);margin-top:6px;}
+  .distance-foot{
+    margin-top:22px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:13px;color:var(--ink-soft);line-height:1.6;
+  }
+  .distance-foot strong{color:var(--ink);}
+
+  /* TRUST STRIP */
+  .trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--sand-deep);}
+  .trust .wrap{display:flex;justify-content:space-between;align-items:center;padding:22px 32px;flex-wrap:wrap;gap:18px;}
+  .trust-item{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:500;color:var(--ink-soft);}
+  .trust-item svg{flex-shrink:0;}
+
+  /* SECTION GENERIC */
+  section{padding:96px 0;}
+  .section-head{max-width:620px;margin-bottom:56px;}
+  .section-head .eyebrow{margin-bottom:16px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px);font-weight:500;letter-spacing:-0.01em;line-height:1.15;}
+  .section-head p{font-size:16px;color:var(--ink-soft);margin-top:14px;line-height:1.65;}
+
+  /* PRODUCTS */
+  .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media(max-width:860px){.product-grid{grid-template-columns:1fr;}}
+  .product-card{
+    background:var(--cream);border:1px solid var(--line);border-radius:18px;
+    padding:32px 28px;transition:border-color .2s;
+  }
+  .product-card:hover{border-color:var(--paprika);}
+  .product-swatch{width:52px;height:52px;border-radius:12px;margin-bottom:22px;}
+  .product-card h3{font-size:19px;font-weight:600;font-family:'Inter',sans-serif;margin-bottom:10px;}
+  .product-card p{font-size:14.5px;color:var(--ink-soft);line-height:1.6;margin-bottom:18px;}
+  .spec-row{display:flex;justify-content:space-between;font-size:12.5px;padding:9px 0;border-top:1px solid var(--line);}
+  .spec-row span:first-child{color:var(--ink-soft);}
+  .spec-row span:last-child{font-family:'JetBrains Mono',monospace;font-weight:500;}
+
+  /* WHY US */
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;}
+  @media(max-width:860px){.why-grid{grid-template-columns:repeat(2,1fr);}}
+  .why-cell{background:var(--cream);padding:32px 26px;}
+  .why-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--paprika);margin-bottom:16px;}
+  .why-cell h3{font-size:16px;font-weight:600;margin-bottom:8px;}
+  .why-cell p{font-size:13.5px;color:var(--ink-soft);line-height:1.6;}
+
+  /* LOGISTICS BAND */
+  .logistics{background:var(--olive);color:var(--cream);}
+  .logistics .section-head h2{color:var(--cream);}
+  .logistics .section-head p{color:rgba(251,248,242,0.7);}
+  .logistics .eyebrow{color:#D9C99B;}
+  .logistics .eyebrow::before{background:#D9C99B;}
+  .route-map{
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;
+    background:rgba(251,248,242,0.06);border:1px solid rgba(251,248,242,0.14);
+    border-radius:20px;padding:40px;
+  }
+  @media(max-width:760px){.route-map{grid-template-columns:1fr;text-align:center;}}
+  .port{text-align:center;}
+  .port-city{font-family:'Fraunces',serif;font-size:24px;margin-bottom:4px;}
+  .port-label{font-size:12.5px;color:rgba(251,248,242,0.6);text-transform:uppercase;letter-spacing:0.05em;}
+  .route-mid{text-align:center;}
+  .route-line{
+    width:140px;height:2px;background:repeating-linear-gradient(90deg,#D9C99B 0 8px,transparent 8px 14px);
+    margin:0 auto 10px;
+  }
+  @media(max-width:760px){.route-line{width:2px;height:60px;margin:10px auto;background:repeating-linear-gradient(180deg,#D9C99B 0 8px,transparent 8px 14px);}}
+  .route-days-big{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:500;color:#D9C99B;}
+  .route-days-label{font-size:12px;color:rgba(251,248,242,0.55);margin-top:2px;}
+
+  /* CERTS */
+  .cert-row{display:flex;gap:16px;flex-wrap:wrap;}
+  .cert-pill{
+    display:flex;align-items:center;gap:10px;
+    background:var(--cream);border:1px solid var(--line);border-radius:100px;
+    padding:12px 20px;font-size:13.5px;font-weight:500;
+  }
+  .cert-dot{width:8px;height:8px;border-radius:50%;background:var(--olive);}
+
+  /* CONTACT FORM */
+  .contact-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:64px;}
+  @media(max-width:860px){.contact-grid{grid-template-columns:1fr;gap:40px;}}
+  .contact-info-item{display:flex;gap:16px;margin-bottom:28px;}
+  .contact-icon{
+    width:42px;height:42px;border-radius:12px;background:var(--sand-deep);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .contact-info-item h4{font-size:14.5px;font-weight:600;margin-bottom:3px;}
+  .contact-info-item p{font-size:13.5px;color:var(--ink-soft);}
+  form{background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:36px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+  @media(max-width:520px){.form-row{grid-template-columns:1fr;}}
+  label{display:block;font-size:12.5px;font-weight:600;margin-bottom:7px;color:var(--ink-soft);}
+  input,select,textarea{
+    width:100%;background:var(--sand);border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px;font-size:14px;font-family:'Inter',sans-serif;color:var(--ink);
+    transition:border-color .2s;
+  }
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--paprika);}
+  textarea{resize:vertical;min-height:90px;}
+  .field{margin-bottom:16px;}
+  .form-submit{
+    width:100%;background:var(--paprika);color:var(--cream);border:none;border-radius:10px;
+    padding:15px;font-size:14.5px;font-weight:600;cursor:pointer;transition:background .2s;
+    margin-top:6px;font-family:'Inter',sans-serif;
+  }
+  .form-submit:hover{background:var(--paprika-deep);}
+  .form-note{font-size:12px;color:var(--ink-soft);text-align:center;margin-top:12px;}
+  #form-success{display:none;text-align:center;padding:40px 20px;}
+  #form-success.show{display:block;}
+  #form-success svg{margin:0 auto 16px;}
+  #form-success h3{font-size:19px;margin-bottom:8px;}
+  #form-success p{font-size:14px;color:var(--ink-soft);}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:48px 0 32px;}
+  .footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:32px;margin-bottom:36px;}
+  .footer-cols{display:flex;gap:64px;flex-wrap:wrap;}
+  .footer-col h4{font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-soft);margin-bottom:14px;}
+  .footer-col a{display:block;font-size:14px;margin-bottom:10px;color:var(--ink);opacity:0.85;}
+  .footer-col a:hover{opacity:1;}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);flex-wrap:wrap;gap:12px;}
+
+  ::selection{background:var(--paprika);color:var(--cream);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo"><span class="logo-mark"></span>Andina Paprika</div>
+    <div class="navlinks">
+      <a href="#productos">Productos</a>
+      <a href="#por-que">Por qué Perú</a>
+      <a href="#logistica">Logística</a>
+      <a href="#certificaciones">Certificaciones</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <a href="#contacto" class="nav-cta">Solicitar cotización</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Exportación directa desde Perú</div>
+      <h1>Páprika que llega a tu planta <em>en días</em>, no en semanas</h1>
+      <p class="lead">Abastecemos a la industria cárnica chilena con páprika de color y calidad consistente, lote tras lote — con la ventaja que la distancia con Asia no te puede dar.</p>
+      <div class="btn-row">
+        <a href="#contacto" class="btn btn-primary">Solicitar muestra gratis</a>
+        <a href="#productos" class="btn btn-ghost">Ver especificaciones técnicas</a>
+      </div>
+    </div>
+    <div class="distance-card">
+      <h3>Tiempo de tránsito marítimo a Chile</h3>
+      <div class="route us">
+        <div class="route-top"><span class="route-name">Perú → Chile</span><span class="route-days">5–7 días</span></div>
+        <div class="bar-track"><div class="bar-fill"></div></div>
+        <div class="route-sub">Puerto de Callao → Valparaíso / San Antonio</div>
+      </div>
+      <div class="route them">
+        <div class="route-top"><span class="route-name">India → Chile</span><span class="route-days">38–45 días</span></div>
+        <div class="bar-track"><div class="bar-fill"></div></div>
+        <div class="route-sub">Puerto de Kochi/Chennai → Valparaíso (vía Panamá)</div>
+      </div>
+      <div class="distance-foot">
+        <strong>6 a 7 veces más rápido.</strong> Eso significa menos capital inmovilizado en inventario, reposición ágil y menor riesgo de quiebre de stock en tu línea de producción.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <div class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>FSSC 22000</div>
+    <div class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Libre de aflatoxinas</div>
+    <div class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>ASTA 120+ garantizado</div>
+    <div class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Certificado fitosanitario SAG</div>
+  </div>
+</div>
+
+<section id="productos">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Catálogo</div>
+      <h2>Páprika para cada línea de producción</h2>
+      <p>Tres presentaciones diseñadas según el uso final en embutidos y cárnicos procesados.</p>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-swatch" style="background:#C5481F"></div>
+        <h3>Páprika dulce en polvo</h3>
+        <p>Color uniforme y sabor suave. Ideal para chorizo, longaniza y mortadela.</p>
+        <div class="spec-row"><span>Color ASTA</span><span>120–140</span></div>
+        <div class="spec-row"><span>Humedad máx.</span><span>11%</span></div>
+        <div class="spec-row"><span>Granulometría</span><span>40–60 mesh</span></div>
+      </div>
+      <div class="product-card">
+        <div class="product-swatch" style="background:#8C3115"></div>
+        <h3>Páprika ahumada</h3>
+        <p>Ahumado natural sobre leña de roble. Para embutidos premium y curados.</p>
+        <div class="spec-row"><span>Color ASTA</span><span>100–120</span></div>
+        <div class="spec-row"><span>Humedad máx.</span><span>10%</span></div>
+        <div class="spec-row"><span>Granulometría</span><span>40–60 mesh</span></div>
+      </div>
+      <div class="product-card">
+        <div class="product-swatch" style="background:#3A4A2E"></div>
+        <h3>Páprika picante</h3>
+        <p>Nivel de picor controlado y estandarizado para fórmulas con especificación SHU.</p>
+        <div class="spec-row"><span>Pungencia</span><span>15,000–30,000 SHU</span></div>
+        <div class="spec-row"><span>Humedad máx.</span><span>11%</span></div>
+        <div class="spec-row"><span>Granulometría</span><span>40–60 mesh</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="por-que" style="background:var(--sand-deep);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">La diferencia real</div>
+      <h2>Lo que el precio bajo de Asia no incluye</h2>
+      <p>Los grandes exportadores indios compiten en volumen y precio. Nosotros competimos en algo que ellos no pueden ofrecer: estar cerca.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-cell">
+        <div class="why-num">01</div>
+        <h3>Reposición rápida</h3>
+        <p>Pedidos urgentes resueltos en menos de una semana, sin esperar el próximo tránsito mensual.</p>
+      </div>
+      <div class="why-cell">
+        <div class="why-num">02</div>
+        <h3>Menos capital en inventario</h3>
+        <p>No necesitas stockear 2 meses de cobertura solo por el tiempo de barco.</p>
+      </div>
+      <div class="why-cell">
+        <div class="why-num">03</div>
+        <h3>Mismo huso horario</h3>
+        <p>Coordinación comercial y de calidad en tiempo real, sin desfase de 12 horas.</p>
+      </div>
+      <div class="why-cell">
+        <div class="why-num">04</div>
+        <h3>Trazabilidad directa</h3>
+        <p>Visitas a planta y auditorías sin cruzar medio mundo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="logistica" class="logistics">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Ruta de exportación</div>
+      <h2>Del Callao a tu planta, sin escalas innecesarias</h2>
+      <p>Conexión marítima directa entre los dos principales puertos peruanos y los puertos chilenos de mayor movimiento de carga.</p>
+    </div>
+    <div class="route-map">
+      <div class="port">
+        <div class="port-city">Callao</div>
+        <div class="port-label">Origen · Perú</div>
+      </div>
+      <div class="route-mid">
+        <div class="route-line"></div>
+        <div class="route-days-big">5–7 días</div>
+        <div class="route-days-label">tránsito marítimo directo</div>
+      </div>
+      <div class="port">
+        <div class="port-city">Valparaíso</div>
+        <div class="port-label">Destino · Chile</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certificaciones">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Calidad verificable</div>
+      <h2>Certificaciones que respaldan cada lote</h2>
+      <p>Cada embarque viaja con su certificado de análisis (COA) y documentación fitosanitaria correspondiente.</p>
+    </div>
+    <div class="cert-row">
+      <div class="cert-pill"><span class="cert-dot"></span>FSSC 22000</div>
+      <div class="cert-pill"><span class="cert-dot"></span>HACCP</div>
+      <div class="cert-pill"><span class="cert-dot"></span>Certificado fitosanitario SENASA</div>
+      <div class="cert-pill"><span class="cert-dot"></span>Análisis de aflatoxinas por lote</div>
+      <div class="cert-pill"><span class="cert-dot"></span>Certificado de origen</div>
+      <div class="cert-pill"><span class="cert-dot"></span>Kosher (bajo solicitud)</div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" style="background:var(--sand-deep);">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="eyebrow">Hablemos</div>
+      <h2 style="font-size:32px;font-weight:500;margin-bottom:18px;letter-spacing:-0.01em;">Solicita tu cotización o muestra</h2>
+      <p style="color:var(--ink-soft);font-size:15px;margin-bottom:36px;line-height:1.6;">Respondemos en menos de 24 horas hábiles. Para pedidos de muestra, el envío llega a Chile en 5 a 7 días.</p>
+
+      <div class="contact-info-item">
+        <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l9 6 9-6M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg></div>
+        <div><h4>Correo comercial</h4><p>ventas@andinapaprika.pe</p></div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+        <div><h4>Línea directa</h4><p>+51 1 234 5678</p></div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><h4>Planta de procesamiento</h4><p>Ica, Perú — a 4h del puerto del Callao</p></div>
+      </div>
+    </div>
+
+    <form id="quote-form">
+      <div id="form-success">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3A4A2E" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+        <h3>Solicitud enviada</h3>
+        <p>Te contactaremos en menos de 24 horas hábiles.</p>
+      </div>
+      <div id="form-fields">
+        <div class="form-row">
+          <div class="field"><label for="nombre">Nombre completo</label><input type="text" id="nombre" required></div>
+          <div class="field"><label for="empresa">Empresa</label><input type="text" id="empresa" required></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="correo">Correo</label><input type="email" id="correo" required></div>
+          <div class="field"><label for="telefono">Teléfono</label><input type="tel" id="telefono"></div>
+        </div>
+        <div class="field">
+          <label for="producto">Producto de interés</label>
+          <select id="producto">
+            <option>Páprika dulce en polvo</option>
+            <option>Páprika ahumada</option>
+            <option>Páprika picante</option>
+            <option>Aún no estoy seguro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="volumen">Volumen estimado mensual</label>
+          <select id="volumen">
+            <option>Menos de 1 tonelada</option>
+            <option>1 a 5 toneladas</option>
+            <option>5 a 15 toneladas</option>
+            <option>Más de 15 toneladas</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="mensaje">Mensaje (opcional)</label>
+          <textarea id="mensaje" placeholder="Cuéntanos sobre tu línea de producción o requisitos específicos"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Enviar solicitud</button>
+        <p class="form-note">Sin compromiso. Incluye envío de muestra física.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="logo" style="margin-bottom:14px;">Andina Paprika</div>
+        <p style="font-size:13.5px;color:var(--ink-soft);max-width:280px;line-height:1.6;">Exportación de páprika peruana para la industria cárnica de Chile y la región.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Sitio</h4>
+          <a href="#productos">Productos</a>
+          <a href="#por-que">Por qué Perú</a>
+          <a href="#logistica">Logística</a>
+          <a href="#certificaciones">Certificaciones</a>
+        </div>
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <a href="#contacto">Contacto</a>
+          <a href="#contacto">Solicitar muestra</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Andina Paprika S.A.C. — Ica, Perú</span>
+      <span>Hecho para la industria cárnica chilena</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('quote-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('form-fields').style.display = 'none';
+    var success = document.getElementById('form-success');
+    success.classList.add('show');
+  });
+</script>
+
+</body>
+</html>
